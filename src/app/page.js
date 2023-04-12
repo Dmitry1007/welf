@@ -1,5 +1,10 @@
-import NavBar from "@/app/components/NavBar";
+// import NavBar from "@/app/components/NavBar";
+import Table from "@/app/components/Table";
 
 export default function Home() {
-    return <NavBar />;
+    return (
+        <>
+            <Table />
+        </>
+    );
 }
