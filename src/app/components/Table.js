@@ -1,13 +1,11 @@
-"use client";
-const transactions = [
+const rows = [
     {
-        id: "AAPS0L",
-        company: "Chase & Co.",
-        share: "CAC",
-        commission: "+$4.37",
-        price: "$3,509.00",
-        quantity: "12.00",
-        netAmount: "$4,397.00",
+        symbol: "TSLA",
+        quantity: "100",
+        pricePerShare: "180.53",
+        totalCost: "COMPUTE",
+        currentPrice: "FETCH",
+        marketValue: "COMPUTE",
     },
     // More transactions...
 ];
@@ -18,11 +16,11 @@ export default function Table() {
             <div className="sm:flex sm:items-center">
                 <div className="sm:flex-auto">
                     <h1 className="text-base font-semibold leading-6 text-gray-900">
-                        Transactions
+                        Stock Portfolio
                     </h1>
                     <p className="mt-2 text-sm text-gray-700">
-                        A table of placeholder stock market data that does not
-                        make any sense.
+                        A Stock Portfolio is a collection of stocks that you
+                        own.
                     </p>
                 </div>
                 <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
@@ -44,31 +42,7 @@ export default function Table() {
                                         scope="col"
                                         className="whitespace-nowrap py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0"
                                     >
-                                        Transaction ID
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                    >
-                                        Company
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                    >
-                                        Share
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                    >
-                                        Commision
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
-                                    >
-                                        Price
+                                        Ticker
                                     </th>
                                     <th
                                         scope="col"
@@ -80,8 +54,27 @@ export default function Table() {
                                         scope="col"
                                         className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
                                     >
-                                        Net amount
+                                        Price Per Share
                                     </th>
+                                    <th
+                                        scope="col"
+                                        className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                    >
+                                        Total Cost
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                    >
+                                        Current Price
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className="whitespace-nowrap px-2 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                    >
+                                        Market Value
+                                    </th>
+
                                     <th
                                         scope="col"
                                         className="relative whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-0"
@@ -91,29 +84,27 @@ export default function Table() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200 bg-white">
-                                {transactions.map((transaction) => (
-                                    <tr key={transaction.id}>
+                                {rows.map((row, index) => (
+                                    <tr key={index}>
                                         <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                                            {transaction.id}
+                                            {row.symbol}
                                         </td>
                                         <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">
-                                            {transaction.company}
+                                            {row.quantity}
                                         </td>
                                         <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
-                                            {transaction.share}
+                                            {row.pricePerShare}
                                         </td>
                                         <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                            {transaction.commission}
+                                            {row.totalCost}
                                         </td>
                                         <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                            {transaction.price}
+                                            {row.currentPrice}
                                         </td>
                                         <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                            {transaction.quantity}
+                                            {row.marketValue}
                                         </td>
-                                        <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                            {transaction.netAmount}
-                                        </td>
+
                                         <td className="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                             <a
                                                 href="#"
@@ -121,7 +112,7 @@ export default function Table() {
                                             >
                                                 Edit
                                                 <span className="sr-only">
-                                                    , {transaction.id}
+                                                    , {index}
                                                 </span>
                                             </a>
                                         </td>
