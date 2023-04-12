@@ -5,7 +5,10 @@ import DropDown from "@/app/components/DropDown";
 export default function Home() {
     return (
         <div className="flex justify-center">
-            <DropDown />
+            <DropDown
+                heading="Add Portfolio"
+                items={["Stocks", "Crypto", "Bonds", "Real Estate"]}
+            />
         </div>
     );
 }
