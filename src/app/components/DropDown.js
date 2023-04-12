@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
@@ -7,11 +7,14 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function DropDown({ heading, items }) {
+export default function DropDown({ heading, items, handleItemSelection }) {
     const renderItems = () => {
         const renderedItems = items.map((item, index) => {
             return (
-                <Menu.Item key={index}>
+                <Menu.Item
+                    key={index}
+                    onClick={() => handleItemSelection(item)}
+                >
                     {({ active }) => (
                         <a
                             href="#"
