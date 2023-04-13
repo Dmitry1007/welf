@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import PriceInput from "./PriceInput";
 import BasicInput from "./BasicInput";

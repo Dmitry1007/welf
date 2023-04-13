@@ -1,7 +1,7 @@
-"use client";
-import NavBar from "@/app/components/NavBar";
+// "use client";
+// import NavBar from "@/app/components/NavBar";
+// import DropDown from "@/app/components/DropDown";
 import Table from "@/app/components/Table";
-import DropDown from "@/app/components/DropDown";
 
 export default function Home() {
     const handleAddNewPortfolio = (item) => {
