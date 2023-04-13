@@ -1,3 +1,6 @@
+import { useState } from "react";
+import PriceInput from "./PriceInput";
+
 const rows = [
     {
         symbol: "TSLA",
@@ -11,6 +14,12 @@ const rows = [
 ];
 
 export default function Table() {
+    const [isUpdating, setIsUpdating] = useState(false);
+
+    const handleAddRow = () => {
+        setIsUpdating(true);
+    };
+
     return (
         <div className="px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center">
@@ -22,14 +31,6 @@ export default function Table() {
                         A Stock Portfolio is a collection of stocks that you
                         own.
                     </p>
-                </div>
-                <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                    <button
-                        type="button"
-                        className="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                    >
-                        Export
-                    </button>
                 </div>
             </div>
             <div className="mt-8 flow-root">
@@ -110,7 +111,7 @@ export default function Table() {
                                                 href="#"
                                                 className="text-indigo-600 hover:text-indigo-900"
                                             >
-                                                Edit
+                                                Delete
                                                 <span className="sr-only">
                                                     , {index}
                                                 </span>
@@ -118,6 +119,79 @@ export default function Table() {
                                         </td>
                                     </tr>
                                 ))}
+                                <tr>
+                                    <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
+                                        symbol
+                                    </td>
+                                    <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">
+                                        quantity
+                                    </td>
+                                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
+                                        <PriceInput />
+                                    </td>
+                                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                        Empty
+                                    </td>
+                                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                        Empty
+                                    </td>
+                                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                        Empty
+                                    </td>
+
+                                    <td className="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                        <a
+                                            href="#"
+                                            className="text-indigo-600 hover:text-indigo-900"
+                                        >
+                                            Delete
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                {isUpdating ? (
+                                    <tr>
+                                        <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
+                                            Input
+                                        </td>
+                                        <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">
+                                            Input
+                                        </td>
+                                        <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
+                                            Input
+                                        </td>
+                                        <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                            Empty
+                                        </td>
+                                        <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                            Empty
+                                        </td>
+                                        <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                            Empty
+                                        </td>
+
+                                        <td className="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                            <a
+                                                href="#"
+                                                className="text-indigo-600 hover:text-indigo-900"
+                                            >
+                                                Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                ) : (
+                                    <tr>
+                                        <td>
+                                            <button
+                                                onClick={() => handleAddRow()}
+                                                type="button"
+                                                className="rounded-md bg-indigo-600 px-3 py-2 text-center text-sm text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                            >
+                                                Add Stock
+                                            </button>
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
