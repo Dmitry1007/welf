@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PriceInput from "./PriceInput";
+import BasicInput from "./BasicInput";
 
 const rows = [
     {
@@ -119,55 +120,32 @@ export default function Table() {
                                         </td>
                                     </tr>
                                 ))}
-                                <tr>
-                                    <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                                        symbol
-                                    </td>
-                                    <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">
-                                        quantity
-                                    </td>
-                                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
-                                        <PriceInput />
-                                    </td>
-                                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                        Empty
-                                    </td>
-                                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                        Empty
-                                    </td>
-                                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                        Empty
-                                    </td>
-
-                                    <td className="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                                        <a
-                                            href="#"
-                                            className="text-indigo-600 hover:text-indigo-900"
-                                        >
-                                            Delete
-                                        </a>
-                                    </td>
-                                </tr>
 
                                 {isUpdating ? (
                                     <tr>
                                         <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                                            Input
-                                        </td>
-                                        <td className="whitespace-nowrap px-2 py-2 text-sm font-medium text-gray-900">
-                                            Input
+                                            <BasicInput
+                                                placeholder={"Symbol"}
+                                                type={"search"}
+                                            />
                                         </td>
                                         <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
-                                            Input
+                                            <BasicInput
+                                                placeholder={"Quantity"}
+                                                type={"number"}
+                                            />
+                                        </td>
+                                        <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
+                                            <PriceInput />
                                         </td>
                                         <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                            Empty
+                                            COMPUTE
                                         </td>
                                         <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                            Empty
+                                            FETCH
                                         </td>
                                         <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                            Empty
+                                            COMPUTE
                                         </td>
 
                                         <td className="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
