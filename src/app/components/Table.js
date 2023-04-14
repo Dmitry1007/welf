@@ -1,7 +1,5 @@
 "use client";
-import { useState } from "react";
-import PriceInput from "./PriceInput";
-import BasicInput from "./BasicInput";
+// import { useState } from "react";
 
 const rows = [
     {
@@ -16,11 +14,10 @@ const rows = [
 ];
 
 export default function Table({ data }) {
-    console.log("data bitches", data);
-    const [isUpdating, setIsUpdating] = useState(false);
+    console.log("data", data);
 
-    const handleAddRow = () => {
-        setIsUpdating(true);
+    const handleAddRow = (data) => {
+        console.log(data);
     };
 
     return (
@@ -122,55 +119,50 @@ export default function Table({ data }) {
                                         </td>
                                     </tr>
                                 ))}
-
-                                {isUpdating ? (
-                                    <tr>
-                                        <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
-                                            <BasicInput
-                                                placeholder={"Symbol"}
-                                                type={"search"}
-                                            />
-                                        </td>
-                                        <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
-                                            <BasicInput
-                                                placeholder={"Quantity"}
-                                                type={"number"}
-                                            />
-                                        </td>
-                                        <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
-                                            <PriceInput />
-                                        </td>
-                                        <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                            COMPUTE
-                                        </td>
-                                        <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                            FETCH
-                                        </td>
-                                        <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                            COMPUTE
-                                        </td>
-                                        <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                                            <button
-                                                type="button"
-                                                className="rounded bg-indigo-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                            >
-                                                Submit
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ) : (
-                                    <tr>
-                                        <td>
-                                            <button
-                                                onClick={() => handleAddRow()}
-                                                type="button"
-                                                className="rounded bg-indigo-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                            >
-                                                Add Stock
-                                            </button>
-                                        </td>
-                                    </tr>
-                                )}
+                                <tr>
+                                    <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
+                                        <input
+                                            type="search"
+                                            name=""
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            placeholder="Symbol"
+                                        />
+                                    </td>
+                                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
+                                        <input
+                                            type="number"
+                                            name=""
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            placeholder="Quantity"
+                                        />
+                                    </td>
+                                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
+                                        <input
+                                            type="number"
+                                            name=""
+                                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            placeholder="Price"
+                                        />
+                                    </td>
+                                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                        ...
+                                    </td>
+                                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                        ...
+                                    </td>
+                                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                        ...
+                                    </td>
+                                    <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
+                                        <button
+                                            onClick={() => handleAddRow()}
+                                            type="button"
+                                            className="rounded bg-indigo-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                        >
+                                            Add Stock
+                                        </button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

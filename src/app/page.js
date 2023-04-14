@@ -26,8 +26,8 @@ async function getData() {
 }
 
 export default async function Home() {
-    const data = await getData();
-    // const data = { price: "MOCKED DATA" };
+    // const data = await getData();
+    const data = { price: "MOCKED DATA" };
     console.log(data);
 
     const handleAddNewPortfolio = (item) => {
