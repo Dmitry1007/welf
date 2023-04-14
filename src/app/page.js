@@ -49,7 +49,7 @@ export default async function Home() {
                     handleItemSelection={handleAddNewPortfolio}
                 />
             </div> */}
-            <Table />
+            <Table data={data} />
         </>
     );
 }

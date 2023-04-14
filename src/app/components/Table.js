@@ -15,7 +15,8 @@ const rows = [
     // More transactions...
 ];
 
-export default function Table() {
+export default function Table({ data }) {
+    console.log("data bitches", data);
     const [isUpdating, setIsUpdating] = useState(false);
 
     const handleAddRow = () => {
