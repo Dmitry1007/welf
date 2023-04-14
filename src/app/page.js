@@ -1,9 +1,25 @@
-// "use client";
 // import NavBar from "@/app/components/NavBar";
 // import DropDown from "@/app/components/DropDown";
 import Table from "@/app/components/Table";
 
-export default function Home() {
+async function getData() {
+    const res = await fetch("https://catfact.ninja/fact");
+    // The return value is *not* serialized
+    // You can return Date, Map, Set, etc.
+
+    // Recommendation: handle errors
+    if (!res.ok) {
+        // This will activate the closest `error.js` Error Boundary
+        throw new Error("Failed to fetch data");
+    }
+
+    return res.json();
+}
+
+export default async function Home() {
+    const data = await getData();
+    console.log(data);
+
     const handleAddNewPortfolio = (item) => {
         switch (item) {
             case "Stocks":
