@@ -133,7 +133,9 @@ export default function Table({ data }) {
                   <tr>
                     <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
                       <input
-                        onChange={(e) => setSymbol(e.target.value)}
+                        onChange={(e) =>
+                          setSymbol(e.target.value.toUpperCase())
+                        }
                         value={symbol}
                         type="search"
                         required
