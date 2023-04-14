@@ -1,13 +1,22 @@
+require("dotenv").config();
 // import NavBar from "@/app/components/NavBar";
 // import DropDown from "@/app/components/DropDown";
 import Table from "@/app/components/Table";
 
 async function getData() {
-    const res = await fetch("https://catfact.ninja/fact");
-    // The return value is *not* serialized
-    // You can return Date, Map, Set, etc.
+    const options = {
+        method: "GET",
+        headers: {
+            "X-RapidAPI-Key": process.env.RAPID_API_KEY_TWELVE_DATA,
+            "X-RapidAPI-Host": "twelve-data1.p.rapidapi.com",
+        },
+    };
 
-    // Recommendation: handle errors
+    const res = await fetch(
+        "https://twelve-data1.p.rapidapi.com/price?symbol=AMZN&format=json&outputsize=30",
+        options
+    );
+
     if (!res.ok) {
         // This will activate the closest `error.js` Error Boundary
         throw new Error("Failed to fetch data");
@@ -18,6 +27,7 @@ async function getData() {
 
 export default async function Home() {
     const data = await getData();
+    // const data = { price: "MOCKED DATA" };
     console.log(data);
 
     const handleAddNewPortfolio = (item) => {
