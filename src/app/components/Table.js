@@ -124,14 +124,19 @@ export default function Table({ data }) {
                         {row.marketValue}
                       </td>
 
-                      <td className="relative whitespace-nowrap py-2 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                        <a
-                          href="#"
-                          className="text-indigo-600 hover:text-indigo-900"
+                      <td className="flex space-x-1 px-2 py-2 text-sm  font-medium sm:pr-0">
+                        <button
+                          type="button"
+                          className="rounded bg-blue-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          type="button"
+                          className="rounded bg-red-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
                         >
                           Delete
-                          <span className="sr-only">, {index}</span>
-                        </a>
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -178,7 +183,7 @@ export default function Table({ data }) {
                     <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
                       <button
                         type="submit"
-                        className="rounded bg-indigo-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                        className="rounded bg-green-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
                       >
                         Add Stock
                       </button>
