@@ -20,7 +20,7 @@ export default function Table({ data }) {
   const [quantity, setQuantity] = useState("0");
   const [pricePerShare, setPricePerShare] = useState("0");
 
-  const handleAddStock = (event) => {
+  const handleAdd = (event) => {
     event.preventDefault();
     setStocks([
       ...stocks,
@@ -38,6 +38,10 @@ export default function Table({ data }) {
     setPricePerShare("0");
   };
 
+  const handleDelete = (index) => {
+    setStocks(stocks.filter((_, i) => i !== index));
+  };
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
@@ -53,7 +57,7 @@ export default function Table({ data }) {
       <div className="mt-8 flow-root">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <form onSubmit={(event) => handleAddStock(event)}>
+            <form onSubmit={(event) => handleAdd(event)}>
               <table className="min-w-full divide-y divide-gray-300">
                 <thead>
                   <tr>
@@ -98,7 +102,7 @@ export default function Table({ data }) {
                       scope="col"
                       className="relative whitespace-nowrap py-3.5 pl-3 pr-4 sm:pr-0"
                     >
-                      <span className="sr-only">Edit</span>
+                      <span className="sr-only">Edit/Delete</span>
                     </th>
                   </tr>
                 </thead>
@@ -132,6 +136,7 @@ export default function Table({ data }) {
                           Edit
                         </button>
                         <button
+                          onClick={() => handleDelete(index)}
                           type="button"
                           className="rounded bg-red-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
                         >
