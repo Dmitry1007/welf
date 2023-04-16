@@ -3,9 +3,19 @@ import { useState } from "react";
 
 const rows = [
   {
+    id: 1,
     symbol: "TSLA",
     quantity: "100",
     pricePerShare: "180.53",
+    totalCost: "COMPUTE",
+    currentPrice: "FETCH",
+    marketValue: "COMPUTE",
+  },
+  {
+    id: 2,
+    symbol: "AAPL",
+    quantity: "200",
+    pricePerShare: "340.50",
     totalCost: "COMPUTE",
     currentPrice: "FETCH",
     marketValue: "COMPUTE",
@@ -19,12 +29,20 @@ export default function Table({ data }) {
   const [symbol, setSymbol] = useState("");
   const [quantity, setQuantity] = useState("0");
   const [pricePerShare, setPricePerShare] = useState("0");
+  const [isEditing, setIsEditing] = useState(false);
+  const [editId, setEditId] = useState(null);
 
-  const handleAdd = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
+    if (isEditing) {
+      console.log("handleSubmit Editing id", editId);
+      handleEdit();
+      return;
+    }
     setStocks([
       ...stocks,
       {
+        id: stocks.length + 1,
         symbol,
         quantity,
         pricePerShare,
@@ -42,6 +60,26 @@ export default function Table({ data }) {
     setStocks(stocks.filter((_, i) => i !== index));
   };
 
+  const handleEdit = () => {
+    console.log("Handle Edit Editing id", editId);
+    const newStocks = stocks.map((stock) => {
+      if (stock.id === editId) {
+        return {
+          ...stock,
+          symbol,
+          quantity,
+          pricePerShare,
+        };
+      }
+      return stock;
+    });
+    setStocks(newStocks);
+    setSymbol("");
+    setQuantity("0");
+    setPricePerShare("0");
+    setIsEditing(false);
+  };
+
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
@@ -57,7 +95,7 @@ export default function Table({ data }) {
       <div className="mt-8 flow-root">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <form onSubmit={(event) => handleAdd(event)}>
+            <form onSubmit={(event) => handleSubmit(event)}>
               <table className="min-w-full divide-y divide-gray-300">
                 <thead>
                   <tr>
@@ -107,8 +145,8 @@ export default function Table({ data }) {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {stocks.map((row, index) => (
-                    <tr key={index}>
+                  {stocks.map((row, _) => (
+                    <tr key={row.id}>
                       <td className="whitespace-nowrap py-2 pl-4 pr-3 text-sm text-gray-500 sm:pl-0">
                         {row.symbol}
                       </td>
@@ -116,7 +154,7 @@ export default function Table({ data }) {
                         {row.quantity}
                       </td>
                       <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-900">
-                        {row.pricePerShare}
+                        ${row.pricePerShare}
                       </td>
                       <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
                         {row.totalCost}
@@ -130,13 +168,20 @@ export default function Table({ data }) {
 
                       <td className="flex space-x-1 px-2 py-2 text-sm  font-medium sm:pr-0">
                         <button
+                          onClick={() => {
+                            setIsEditing(true);
+                            setEditId(row.id);
+                            setSymbol(row.symbol);
+                            setQuantity(row.quantity);
+                            setPricePerShare(row.pricePerShare);
+                          }}
                           type="button"
                           className="rounded bg-blue-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
                         >
                           Edit
                         </button>
                         <button
-                          onClick={() => handleDelete(index)}
+                          onClick={() => handleDelete(row.id)}
                           type="button"
                           className="rounded bg-red-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
                         >
@@ -154,6 +199,7 @@ export default function Table({ data }) {
                         value={symbol}
                         type="search"
                         required
+                        disabled={isEditing}
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         placeholder="Symbol"
                       />
@@ -190,7 +236,7 @@ export default function Table({ data }) {
                         type="submit"
                         className="rounded bg-green-600 px-2 py-1 text-xs font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
                       >
-                        Add Stock
+                        {isEditing ? "Update Stock" : "Add Stock"}
                       </button>
                     </td>
                   </tr>
