@@ -35,7 +35,6 @@ export default function Table({ data }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (isEditing) {
-      console.log("handleSubmit Editing id", editId);
       handleEdit();
       return;
     }
@@ -46,7 +45,7 @@ export default function Table({ data }) {
         symbol,
         quantity,
         pricePerShare,
-        totalCost: "COMPUTE",
+        totalCost: quantity * pricePerShare,
         currentPrice: "FETCH",
         marketValue: "COMPUTE",
       },
@@ -61,7 +60,6 @@ export default function Table({ data }) {
   };
 
   const handleEdit = () => {
-    console.log("Handle Edit Editing id", editId);
     const newStocks = stocks.map((stock) => {
       if (stock.id === editId) {
         return {
@@ -87,12 +85,9 @@ export default function Table({ data }) {
           <h1 className="text-base font-semibold leading-6 text-gray-900">
             Stock Portfolio
           </h1>
-          <p className="mt-2 text-sm text-gray-700">
-            A Stock Portfolio is a collection of stocks that you own.
-          </p>
         </div>
       </div>
-      <div className="mt-8 flow-root">
+      <div className="mt-4 flow-root">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
             <form onSubmit={(event) => handleSubmit(event)}>
@@ -157,7 +152,7 @@ export default function Table({ data }) {
                         ${row.pricePerShare}
                       </td>
                       <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
-                        {row.totalCost}
+                        ${row.totalCost}
                       </td>
                       <td className="whitespace-nowrap px-2 py-2 text-sm text-gray-500">
                         {row.currentPrice}
